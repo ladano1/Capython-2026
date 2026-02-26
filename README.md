@@ -10,13 +10,13 @@ Wenndy: Design Concept, Video Editing, model creation (2D/3D)
 
 Ziyan: Touchdesigner or Web
 
+Satine: Web, UI/UX, Design
+
 Laith: Touchdesigner or Web
 
 Ramanah: Video Editing
 
 Baginda: Web, Video Editing
-
-Satine: Web, UI/UX, Design
 
 Evelyn: TBD
 
