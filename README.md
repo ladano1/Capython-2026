@@ -81,8 +81,15 @@ AI robots have a built in weapon using nano-tech
 
 ---
 
+## 😏 Side Character
 
-## 🌍 Worldbuilding Basics (AI)
+- Plately Harrow
+- Age: 21 
+- Young explorer who goes up to the surface to scavenge
+
+---
+
+## 🌍 Worldbuilding Basics (AI, Ironically)
 
 - AI was originally built to solve the global energy crisis.
 - It discovered a way to extract planetary “core energy” at massive scale.
