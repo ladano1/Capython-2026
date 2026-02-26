@@ -13,7 +13,7 @@ Our team combines web development, interactive design, motion graphics, and imme
 | **Baginda** | Website |
 | **Satine** | Website |
 | **Laith** | GitHub, Website |
-| **Ramanah** | Moodboard |
+| **Ramanah** | Moodboard, Video Editing |
 | **Evelyn** | Logo & Mockups, Website Design |
 | **Ira** | Project Manager, Website scripts |
 
@@ -24,6 +24,13 @@ Our team combines web development, interactive design, motion graphics, and imme
 ## Brief
 
 A mid-budget sci-fi indie film is premiering at a major festival and streaming shortly after The producers want a premiere event that builds hype and visually reflects the film's futuristic aesthetic.
+
+---
+
+# Agency Brand Identity
+
+Brand voice: Works with low budget movies.
+Mission Statement  Not like other big cimpanies.
 
 ---
 
