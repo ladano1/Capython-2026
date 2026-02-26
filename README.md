@@ -47,11 +47,21 @@ Mission Statement  Not like other big cimpanies.
 
 AI vs Humans  
 
+Ai took over the earth and dried it up of its life and energy. [Main character] tries to fight against the AI robots and retrieve the [crucial energy source] that is kept in a spaceship. 
+
 ---
 
 ## 🌌 Setting
 
 Space, AI spaceships & Ruined EARTH  
+
+---
+
+## ⚔️ Core Themes
+
+Humanity vs Its intelligent creation
+Control vs Free will
+Hope in a dead world
 
 ---
 
