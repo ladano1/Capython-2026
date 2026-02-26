@@ -6,9 +6,9 @@ Our team combines web development, interactive design, motion graphics, and imme
 
 Members of the Team and their roles:
 
-Wenndy: Sketches, Moodboard
+Wenndy: Sketches, Moodboard, Figma
 
-Ziyan: Helping with creating a web layout matching the theme, Producing Real-Time Interactive Visual,
+Ziyan: Helping with creating a web layout matching the theme, Producing Real-Time Interactive Visual, Figma
 
 Baginda: Website  
 
