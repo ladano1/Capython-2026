@@ -11,8 +11,8 @@ Our team combines web development, interactive design, motion graphics, and imme
 | **Wenndy** | Sketches, Moodboard, Storyboard Video Editing, Figma Organization, Mini Videogame Design |
 | **Ziyan** | Web layout (from Moodboard), Producing Real-Time Interactive Visual, Mini Videogame coding |
 | **Baginda** | Website |
-| **Satine** | Website |
 | **Laith** | GitHub, Website |
+| **Satine** | Website |
 | **Ramanah** | Moodboard, Video Editing |
 | **Evelyn** | Logo & Mockups, Website Design |
 | **Ira** | Project Manager |
