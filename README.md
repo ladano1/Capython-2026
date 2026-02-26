@@ -6,18 +6,18 @@ Our team combines web development, interactive design, motion graphics, and imme
 
 Members of the Team and their roles:
 
-Wenndy: Design Concept, Video Editing, model creation (2D/3D)
+Wenndy: Sketches, Moodboard
 
-Ziyan: Touchdesigner or Web
+Ziyan: Helping with creating a web layout matching the theme, Producing Real-Time Interactive Visual,
 
-Satine: Web, UI/UX, Design
+Baginda: Website  
 
-Laith: Touchdesigner or Web
+Satine: Website
 
-Ramanah: Video Editing
+Laith: GitHub, Website
 
-Baginda: Web, Video Editing
+Ramanah: Moodboard, 
 
-Evelyn: TBD
+Evelyn: Logo & Mockups, Website Design
 
-Ira: TBD
+Ira: Project Manager
