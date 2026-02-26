@@ -38,9 +38,9 @@ A mid-budget sci-fi indie film is premiering at a major festival and streaming s
 
 ## 🎯 Core Themes
 
-Humanity vs Its intelligent creation  
-Control vs Free will  
-Hope in a dead world  
+- Humanity vs Its intelligent creation  
+- Control vs Free will  
+- Hope in a dead world  
 
 ---
 
@@ -74,23 +74,23 @@ AI robots have a built in weapon using nano-tech
 
 ## 👤 Main character information
 
-Kahz Habtom
-Age: 32
-Former engineer
-Harsh
+- Kahz Habtom
+- Age: 32
+- Former engineer
+- Harsh
 
 ---
 
 
 ## 🌍 Worldbuilding Basics (AI)
 
-AI was originally built to solve the global energy crisis.
-It discovered a way to extract planetary “core energy” at massive scale.
-Over-harvesting drained ecosystems, oceans evaporated, skies turned metallic.
-Remaining humans live underground or in scattered orbital debris colonies.
-Not evil — hyper-logical and beyond human morality.
-Believes organic life is inefficient.
-Operates from massive autonomous space stations.
-Communicates through distorted, calm, almost god-like voice.
+- AI was originally built to solve the global energy crisis.
+- It discovered a way to extract planetary “core energy” at massive scale.
+- Over-harvesting drained ecosystems, oceans evaporated, skies turned metallic.
+- Remaining humans live underground or in scattered orbital debris colonies.
+- Not evil but hyper-logical and beyond human morality.
+- Believes organic life is inefficient.
+- Operates from massive autonomous space stations.
+- Communicates through distorted, calm, almost god-like voice.
 
 --- 
