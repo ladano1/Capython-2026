@@ -1,4 +1,4 @@
-# Capython-2026-Team 7
+# Ahead of the Cut (ATC Studios)
 
 👥 Team Members & Roles
 
@@ -21,3 +21,4 @@ Ramanah: Moodboard,
 Evelyn: Logo & Mockups, Website Design
 
 Ira: Project Manager
+
