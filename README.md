@@ -48,7 +48,7 @@ Hope in a dead world
 
 AI vs Humans  
 
-AI vs Humans, Ai took over the earth and dried it up of its life and energy. [Main character] tries to fight against the AI robots and retrieve the [crucial energy source] that is kept in a spaceship.  
+Ai took over the earth and dried it up of its life and energy. [Main character] tries to fight against the AI robots and retrieve the [crucial energy source] that is kept in a spaceship.  
 
 ---
 
