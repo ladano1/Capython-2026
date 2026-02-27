@@ -6,10 +6,7 @@ body {
     overflow-x: hidden;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 1f895a2 (new stuff added)
 body::before {
     content: "";
     position: fixed;
