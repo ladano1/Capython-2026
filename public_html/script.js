@@ -10,10 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (bootScreen && bootType && bootBar && bootSub) {
 
         
-<<<<<<< HEAD
-        
-=======
->>>>>>> 1f895a2 (new stuff added)
+
         if (!bootType.hasAttribute("data-text")) {
             bootType.setAttribute("data-text", bootType.textContent.trim());
         }
