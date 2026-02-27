@@ -9,7 +9,10 @@ const restartBtn = document.getElementById('restart-btn');
 const endTitle = document.getElementById('end-title');
 const endMessage = document.getElementById('end-message');
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f895a2 (new stuff added)
 restartBtn.addEventListener('click', startGame);
 
 // Configuration du Monde

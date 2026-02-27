@@ -44,5 +44,9 @@ function typeWriter() {
     }
 }
 
+<<<<<<< HEAD
 typeWriter();
 
+=======
+typeWriter();
+>>>>>>> 1f895a2 (new stuff added)
