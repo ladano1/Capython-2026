@@ -1,4 +1,3 @@
-
 body {
     margin: 0;
     background: radial-gradient(circle at center, #0b0f1a 0%, #000 70%);
@@ -34,7 +33,6 @@ header {
     letter-spacing: 6px;
 }
 
-
 .warning-box {
     margin-top: 60px;
     padding: 30px;
@@ -50,7 +48,6 @@ header {
 .warning-box p {
     line-height: 1.6;
 }
-
 
 .glitch {
     font-size: 48px;
@@ -91,13 +88,11 @@ header {
     100% { clip-path: inset(60% 0 0 0); transform: translate(-2px, -2px); }
 }
 
-
 .overview {
     margin-top: 60px;
     line-height: 1.8;
     font-size: 16px;
 }
-
 
 .launch-btn {
     margin-top: 50px;
@@ -117,7 +112,6 @@ header {
     color: black;
 }
 
-
 footer {
     margin-top: 100px;
     padding: 20px;
@@ -125,7 +119,6 @@ footer {
     color: #555;
     border-top: 1px solid rgba(255,255,255,0.1);
 }
-
 
 body::before {
     content: "";
@@ -216,6 +209,7 @@ body::before {
     z-index: 1000;
 }
 
+
 .boot-screen {
     position: fixed;
     inset: 0;
@@ -228,6 +222,62 @@ body::before {
     letter-spacing: 4px;
     z-index: 2000;
     transition: opacity 1s ease;
+}
+
+.boot-inner {
+    width: min(700px, 90%);
+    text-align: center;
+    padding: 30px;
+    border: 1px solid rgba(0,247,255,0.25);
+    box-shadow: 0 0 25px rgba(0,247,255,0.15);
+    background: radial-gradient(circle at top, rgba(0,247,255,0.06), rgba(0,0,0,0.9));
+}
+
+.boot-title {
+    margin: 0 0 16px 0;
+    font-size: 26px;
+    letter-spacing: 6px;
+}
+
+.boot-type {
+    margin-top: 8px;
+    color: #00ff9d;
+}
+
+.boot-sub {
+    margin-top: 18px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: rgba(224,224,224,0.7);
+}
+
+.boot-bar-wrap {
+    width: 100%;
+    height: 12px;
+    border: 1px solid rgba(0,247,255,0.35);
+    margin: 22px auto 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.boot-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, rgba(0,247,255,0.2), rgba(0,247,255,1), rgba(0,255,157,0.9));
+    box-shadow: 0 0 12px rgba(0,247,255,0.6);
+    transition: width 0.25s linear;
+}
+
+/* Boot flicker / scanline feel */
+@keyframes bootFlicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+    60% { opacity: 0.95; }
+    70% { opacity: 0.8; }
+}
+
+#bootScreen {
+    animation: bootFlicker 1.8s infinite;
 }
 
 .glitch-burst {

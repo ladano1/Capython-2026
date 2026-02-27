@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sol III Intercepted - Core Retrieval</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+    
+<div id="game-container">
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    
+    <div id="ui">
+        <div>
+            <div class="stat">Pilot: KAHZ HABTOM</div>
+            <div id="health-bar-container"><div id="health-bar"></div></div>
+        </div>
+        <div style="text-align: right;">
+            <div class="stat">ENERGY CORES: <span id="score-display">0</span> / 5</div>
+            <div class="stat" style="margin-top: 5px; font-size: 12px; color: #aaa;">WASD: Move | Mouse: Aim/Shoot</div>
+        </div>
+    </div>
+
+    <div id="game-over">
+        <h1 id="end-title">CRITICAL FAILURE</h1>
+        <p id="end-message">"We estimate the global population at a mere 8,000. And now, one less."</p>
+        <button id="restart-btn">Restart Simulation</button>
+    </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>

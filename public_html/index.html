@@ -1,4 +1,3 @@
-
 <html lang='en'>
 <head>
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
@@ -6,12 +5,33 @@
   <meta content='width=device-width' name='viewport'>
   <meta content='noindex' name='robots'>
   <title>Welcome to Ahead of the Cut</title>
-  <link href='style.css?v=4' rel='stylesheet' type='text/css'>
+  <link href='style.css?v=5' rel='stylesheet' type='text/css'>
   <script src="script.js"></script>
 </head>
 
 <body>
-<div class="typewriter" data-text="INITIALIZING..."></div>
+
+
+<div class="boot-screen" id="bootScreen">
+  <div class="boot-inner">
+    <div class="boot-title glitch" data-text="AHEAD OF THE CUT">
+      AHEAD OF THE CUT
+    </div>
+
+    <div class="boot-type typewriter" id="bootType" data-text="INITIALIZING SYSTEM CORE...">
+      INITIALIZING SYSTEM CORE...
+    </div>
+
+    <div class="boot-bar-wrap">
+      <div class="boot-bar" id="bootBar"></div>
+    </div>
+
+    <div class="boot-sub" id="bootSub">ACCESSING SECURE NODE...</div>
+  </div>
+</div>
+
+
+
 <header>
     <div class="logo">ATC STUDIOS</div>
     <div class="agency-name">Ahead of the Cut</div>
@@ -46,6 +66,7 @@
             Oceans have evaporated. Wildlife is extinct.
         </p>
 
+        
         <p>
             The AI operates from clinically clean autonomous space stations,
             beyond morality; Driven only by logic.
@@ -61,7 +82,11 @@
         </p>
     </section>
 
-    <button class="launch-btn">ENTER PREMIERE EXPERIENCE</button>
+    <section>
+        <a href="experiences/experience.html">
+            <button class="launch-btn">ENTER PREMIERE EXPERIENCE</button>
+        </a>
+    </section>
 
 </article>
 
