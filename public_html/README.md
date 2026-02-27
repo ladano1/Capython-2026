@@ -48,7 +48,7 @@ A mid-budget sci-fi indie film is premiering at a major festival and streaming s
 
 AI vs Humans  
 
-Ai took over the earth and dried it up of its life and energy. [Main character] tries to fight against the AI robots and retrieve the [crucial energy source] that is kept in a spaceship.  
+Ai took over the earth and dried it up of its life and energy. The Main character tries to fight against the AI robots and retrieve the "crucial energy source" that is kept in a spaceship.  
 
 ---
 
