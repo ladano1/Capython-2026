@@ -1,0 +1,13 @@
+body {
+    background: #1a1a1a;
+    color: #ddd;
+    font-family: monospace;
+    padding: 80px;
+}
+
+h1 { color: #aaa; }
+.highlight { color: #ff3c3c; }
+
+a { color: #00f7ff; text-decoration: none; }
+
+a:hover { text-decoration: underline; }

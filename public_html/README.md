@@ -48,7 +48,7 @@ A mid-budget sci-fi indie film is premiering at a major festival and streaming s
 
 AI vs Humans  
 
-Ai took over the earth and dried it up of its life and energy. The Main character tries to fight against the AI robots and retrieve the "crucial energy source" that is kept in a spaceship.  
+Ai took over the earth and dried it up of its life and energy. [Main character] tries to fight against the AI robots and retrieve the [crucial energy source] that is kept in a spaceship.  
 
 ---
 
@@ -101,3 +101,53 @@ AI robots have a built in weapon using nano-tech
 - Communicates through distorted, calm, almost god-like voice.
 
 --- 
+
+
+## What Makes It Stand Out?
+
+Action-focused with minimal exposition. The audience learns progressively while following Kahz as he attempts to save the world and uncover how Earth came to be — and how AI ultimately went rogue.
+
+An emotional AI dystopian landscape that highlights the consequences of humanity’s heavy dependence on technology and the loss of independence as a species.
+
+---
+
+## Why Kahz Habtom Stands Out
+
+Kahz follows traditional methods and relies on tools he builds himself. However, he does not fully reject technological advancement. Instead, he enhances his creations using AI energy — maintaining control rather than allowing it to consume his craft.
+
+He represents balance, not rejection.
+
+---
+
+## The Vibe
+
+The tone is urgent and lonely.
+
+The film is immersive, and the website reflects that immersion — eerie, alive, and incomplete. It should feel as though the story is still writing itself, as if the creator remains in imminent danger.
+
+---
+
+## Core Message
+
+Condemning dependency (aligned with Kahz’s character).
+
+AI and technology are not inherently bad.  
+The danger lies in losing control, surrendering independence, and abandoning human agency.
+
+## Campaign Framework
+
+The Core Message: The film condemns extreme dependency on technology, emphasizing that losing our independence as a species is the true danger.
+
+The Narrative Approach: Action-focused with minimal storytelling. The audience learns the lore along the way, just like the protagonist.
+
+The Tone of the Campaign: Urgent and lonely. We want the media and influencers to feel the imminent danger of being one of the last 8,000 humans left.
+
+---
+
+## The Guest List
+
+The "Makers" (Tech & DIY YouTubers): Creators who specialize in engineering, 3D printing, and crafting. They mirror our main character, Kahz Habtom, a former engineer who builds and improves his own tools.
+
+The "Survivors" (Twitch Gamers): Streamers known for survival, horror, and sci-fi games (fans of Dead Space). They match the urgent, lonely, and action-focused vibe of the film.
+
+The "Archivists" (Sci-Fi & Cinema Press): Journalists and critics who analyze lore and worldbuilding, perfect for discussing the theme of humanity depending heavily on technology.
