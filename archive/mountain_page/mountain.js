@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "ontouchstart" in window ||
         navigator.maxTouchPoints > 0;
 
-
     if (!prefersReducedMotion) {
 
         const canvas = document.createElement("canvas");

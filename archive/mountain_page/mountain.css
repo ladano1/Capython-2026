@@ -7,7 +7,7 @@ body {
     position: relative;
 }
 
-/* Subtle digital grid */
+
 body::before {
     content: "";
     position: fixed;
@@ -20,7 +20,6 @@ body::before {
     animation: gridShift 40s linear infinite;
 }
 
-/* Soft screen scanlines */
 body::after {
     content: "";
     position: fixed;
@@ -36,13 +35,11 @@ body::after {
     z-index: 5;
 }
 
-/* Grid movement */
 @keyframes gridShift {
     from { transform: translate(0,0); }
     to { transform: translate(50px,50px); }
 }
 
-/* Enhanced heading */
 h1 {
     color: #aaa;
     letter-spacing: 3px;
@@ -51,7 +48,6 @@ h1 {
         0 0 20px rgba(255,255,255,0.1);
 }
 
-/* Enhanced highlight */
 .highlight {
     color: #ff3c3c;
     text-shadow:
@@ -59,7 +55,7 @@ h1 {
         0 0 18px rgba(255,60,60,0.5);
 }
 
-/* Digital link styling */
+
 a {
     color: #00f7ff;
     text-decoration: none;
@@ -87,7 +83,7 @@ a:hover::after {
     width: 100%;
 }
 
-/* Subtle ambient glow pulse */
+
 @keyframes ambientPulse {
     0%,100% { box-shadow: 0 0 0 rgba(0,247,255,0); }
     50% { box-shadow: 0 0 120px rgba(0,247,255,0.03); }
@@ -97,7 +93,7 @@ body {
     animation: ambientPulse 6s infinite ease-in-out;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     body {
         padding: 40px 20px;
