@@ -16,7 +16,7 @@ body {
     height: 600px;
     border: 2px solid #444;
     box-shadow: 0 0 30px rgba(0, 255, 136, 0.1);
-    cursor: crosshair; /* Le curseur devient une croix de visée */
+    cursor: crosshair;
 }
 
 canvas {

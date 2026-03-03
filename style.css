@@ -1,3 +1,12 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
 
 body {
     margin: 0;
@@ -8,12 +17,23 @@ body {
     perspective: 1200px;
 }
 
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0,247,255,0.05), transparent 60%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+
+
 #particles {
     position: fixed;
     inset: 0;
     z-index: -3;
 }
-
 
 body::before {
     content: "";
@@ -33,10 +53,12 @@ body::before {
     to { transform: translate(100px,100px); }
 }
 
+
 header {
     padding: 20px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     text-align: center;
+    backdrop-filter: blur(6px);
 }
 
 .logo {
@@ -51,9 +73,37 @@ header {
     text-transform: uppercase;
     letter-spacing: 6px;
     background: linear-gradient(90deg,#00f7ff,#ff00c8);
-    -webkit-background-clip: text; 
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+
+.figma-access {
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+.figma-access a {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #00f7ff;
+    text-decoration: none;
+    border: 1px solid rgba(0,247,255,0.4);
+    padding: 7px 14px;
+    transition: 0.3s ease;
+    box-shadow: 0 0 10px rgba(0,247,255,0.15);
+}
+
+.figma-access a:hover {
+    background: #00f7ff;
+    color: black;
+    box-shadow: 0 0 22px #00f7ff;
+    transform: translateY(-1px);
+}
+
 
 
 .container {
@@ -62,9 +112,11 @@ header {
     margin: auto;
     text-align: center;
     padding-top: 60px;
+    padding-bottom: 30px;
     transform-style: preserve-3d;
     transition: transform 0.2s ease-out;
 }
+
 
 
 .warning-box {
@@ -73,16 +125,20 @@ header {
     border: 1px solid #ff0000;
     background-color: rgba(255, 0, 0, 0.05);
     box-shadow: 0 0 25px rgba(255,0,0,0.3);
+    backdrop-filter: blur(8px);
 }
 
 .warning-box h2 {
     color: #ff3c3c;
     margin-bottom: 20px;
+    letter-spacing: 3px;
 }
 
 .warning-box p {
     line-height: 1.6;
+    margin: 0;
 }
+
 
 
 .glitch {
@@ -126,11 +182,16 @@ header {
 }
 
 
+
 .overview {
     margin-top: 60px;
     line-height: 1.8;
     font-size: 16px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 
 .launch-btn {
@@ -145,6 +206,15 @@ header {
     cursor: pointer;
     transition: 0.3s;
     box-shadow: 0 0 15px rgba(0,247,255,0.4);
+    max-width: 100%;
+}
+
+.launch-btn a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
 }
 
 .launch-btn:hover {
@@ -155,13 +225,24 @@ header {
 }
 
 
+
 footer {
     margin-top: 100px;
     padding: 20px;
     font-size: 12px;
     color: #555;
     border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
 }
+
+
+.footer-note {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 11px;
+    opacity: 0.65;
+}
+
 
 
 .hud-coords,
@@ -170,6 +251,7 @@ footer {
     font-size: 12px;
     font-family: monospace;
     z-index: 1000;
+    pointer-events: none;
 }
 
 .hud-coords {
@@ -183,6 +265,7 @@ footer {
     left: 40px;
     color: #00ff9d;
 }
+
 
 
 .boot-screen {
@@ -234,6 +317,7 @@ footer {
 }
 
 
+
 .glitch-burst {
     animation: glitchFlash 0.3s;
 }
@@ -244,9 +328,8 @@ footer {
     100% { filter: hue-rotate(0deg); }
 }
 
-/* =========================
-   TYPEWRITER
-========================= */
+
+
 .typewriter::after {
     content: "|";
     animation: blink 1s infinite;
@@ -258,9 +341,7 @@ footer {
     25%,75% { opacity:0; }
 }
 
-/* =========================
-   SCROLL REVEAL
-========================= */
+
 .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -272,20 +353,114 @@ footer {
     transform: translateY(0);
 }
 
+
+
 @media (max-width: 600px) {
-    .glitch {
-        font-size: 32px;
+
+    header {
+        padding: 18px 14px;
+    }
+
+    .logo {
+        font-size: 12px;
         letter-spacing: 4px;
     }
 
     .agency-name {
         font-size: 20px;
-        letter-spacing: 4px;
+        letter-spacing: 3px;
+        margin-top: 8px;
+    }
+
+    .figma-access a {
+        font-size: 11px;
+        padding: 7px 12px;
+        letter-spacing: 1.5px;
+    }
+
+    .container {
+        width: 92%;
+        padding-top: 40px;
+    }
+
+    .warning-box {
+        margin-top: 35px;
+        padding: 18px;
+    }
+
+    .warning-box h2 {
+        font-size: 16px;
+        letter-spacing: 2px;
+    }
+
+    .warning-box p {
+        font-size: 13px;
+    }
+
+    .glitch {
+        font-size: 30px;
+        letter-spacing: 3px;
+        margin-top: 55px;
+    }
+
+    .overview {
+        margin-top: 35px;
+        font-size: 14px;
+        line-height: 1.75;
     }
 
     .launch-btn {
-        padding: 10px 30px;
+        width: 100%;
+        max-width: 360px;
+        padding: 12px 18px;
         font-size: 12px;
         letter-spacing: 2px;
+        transform: none;
+    }
+
+    .launch-btn:hover {
+        transform: scale(1.03);
+    }
+
+    footer {
+        margin-top: 70px;
+        padding: 18px 14px;
+    }
+
+
+    .hud-coords {
+        right: 14px;
+        top: 12px;
+        font-size: 11px;
+    }
+
+    .hud-stream {
+        left: 14px;
+        bottom: 12px;
+        font-size: 11px;
+    }
+}
+
+
+
+@media (max-width: 380px) {
+
+    .agency-name {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+
+    .glitch {
+        font-size: 26px;
+        letter-spacing: 2px;
+    }
+
+    .figma-access a {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .launch-btn {
+        max-width: 320px;
     }
 }

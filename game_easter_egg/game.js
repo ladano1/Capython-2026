@@ -1,7 +1,6 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// UI Elements
 const healthBar = document.getElementById('health-bar');
 const scoreDisplay = document.getElementById('score-display');
 const gameOverScreen = document.getElementById('game-over');
@@ -12,18 +11,15 @@ const endMessage = document.getElementById('end-message');
 
 restartBtn.addEventListener('click', startGame);
 
-// Configuration du Monde
 const WORLD_SIZE = 3000;
 const TOTAL_CORES = 5;
 
-// Variables Globales
 let animationId;
 let coresCollected = 0;
 let frameCount = 0;
 let camera = { x: 0, y: 0 };
 let mouse = { x: canvas.width/2, y: canvas.height/2, isDown: false };
 
-// Contrôles
 const keys = { w: false, a: false, s: false, d: false };
 
 window.addEventListener('keydown', (e) => {
@@ -51,7 +47,6 @@ canvas.addEventListener('mousemove', (e) => {
 canvas.addEventListener('mousedown', () => mouse.isDown = true);
 canvas.addEventListener('mouseup', () => mouse.isDown = false);
 
-// --- CLASSES ---
 
 class Player {
     constructor() {
@@ -71,7 +66,6 @@ class Player {
     }
 
     update() {
-        // 1. Détecter la direction d'entrée
         let dirX = 0;
         let dirY = 0;
 
@@ -80,30 +74,24 @@ class Player {
         if (keys.a) dirX -= 1;
         if (keys.d) dirX += 1;
 
-        // 2. Normaliser la direction 
         if (dirX !== 0 || dirY !== 0) {
             let length = Math.hypot(dirX, dirY);
             dirX /= length; 
             dirY /= length;
         }
 
-        // 3. Appliquer l'accélération
         let acceleration = 0.6; 
         this.vx += dirX * acceleration;
         this.vy += dirY * acceleration;
 
-        // 4. Appliquer la friction
         this.vx *= this.friction;
         this.vy *= this.friction;
 
-        // Limites du monde
         this.worldX = Math.max(0, Math.min(WORLD_SIZE, this.worldX + this.vx));
         this.worldY = Math.max(0, Math.min(WORLD_SIZE, this.worldY + this.vy));
 
-        // Calcul de l'angle vers la souris
         this.angle = Math.atan2(mouse.y - (this.worldY - camera.y), mouse.x - (this.worldX - camera.x));
 
-        // Tir
         if (this.cooldown > 0) this.cooldown--;
         if (mouse.isDown && this.cooldown === 0) {
             projectiles.push(new Projectile(this.worldX, this.worldY, this.angle));
@@ -124,7 +112,6 @@ class Player {
         ctx.fillStyle = this.color;
         ctx.fillRect(-this.width/2, -this.height/2, this.width, this.height);
         
-        // Canon
         ctx.fillStyle = '#fff';
         ctx.fillRect(this.width/2, -4, 15, 8);
         
@@ -146,7 +133,7 @@ class Projectile {
         this.vy = Math.sin(angle) * 12;
         this.radius = 4;
         this.color = '#ffff00';
-        this.life = 100; // Disparaît après 100 frames
+        this.life = 100; 
     }
 
     update() {
@@ -182,13 +169,11 @@ class EnergyCore {
         let screenX = this.worldX - camera.x;
         let screenY = this.worldY - camera.y;
 
-        // Aura pulsante
         ctx.globalAlpha = 0.3 + Math.abs(Math.sin(this.pulse)) * 0.3;
         ctx.fillStyle = this.color;
         ctx.fillRect(screenX - this.size/2 - 10, screenY - this.size/2 - 10, this.size + 20, this.size + 20);
         ctx.globalAlpha = 1.0;
 
-        // Noyau
         ctx.fillStyle = '#fff';
         ctx.fillRect(screenX - this.size/2, screenY - this.size/2, this.size, this.size);
     }
@@ -200,20 +185,19 @@ class SatelliteProtector {
         this.angle = Math.random() * Math.PI * 2;
         this.orbitRadius = 80 + Math.random() * 40;
         this.orbitSpeed = 0.02 + Math.random() * 0.03;
-        this.attackSpeed = 4 + Math.random() * 1.5; // Vitesse quand il poursuit le joueur
+        this.attackSpeed = 4 + Math.random() * 1.5; 
         this.size = 20;
         this.hp = 3;
-        this.isAttacking = false; // Nouvel état
+        this.isAttacking = false;
     }
 
     update() {
         if (!this.isAttacking) {
-            // Comportement normal : orbite autour du core
+            
             this.angle += this.orbitSpeed;
             this.worldX = this.core.worldX + Math.cos(this.angle) * this.orbitRadius;
             this.worldY = this.core.worldY + Math.sin(this.angle) * this.orbitRadius;
         } else {
-            // Comportement agressif : fonce sur le joueur
             let angle = Math.atan2(player.worldY - this.worldY, player.worldX - this.worldX);
             this.worldX += Math.cos(angle) * this.attackSpeed;
             this.worldY += Math.sin(angle) * this.attackSpeed;
@@ -224,36 +208,34 @@ class SatelliteProtector {
     draw() {
         let screenX = this.worldX - camera.x;
         let screenY = this.worldY - camera.y;
-        ctx.fillStyle = this.isAttacking ? '#ff0000' : '#ff6600'; // Devient rouge quand il attaque
+        ctx.fillStyle = this.isAttacking ? '#ff0000' : '#ff6600'; 
         ctx.fillRect(screenX - this.size/2, screenY - this.size/2, this.size, this.size);
     }
 }
 
 class Enemy {
     constructor() {
-        // Spawn hors de l'écran par rapport à la caméra
         let angle = Math.random() * Math.PI * 2;
         let dist = Math.max(canvas.width, canvas.height); 
         this.worldX = player.worldX + Math.cos(angle) * dist;
         this.worldY = player.worldY + Math.sin(angle) * dist;
         
-        let isFast = Math.random() < 0.3; // 30% de chance d'être un ennemi rapide
+        let isFast = Math.random() < 0.3;
 
         if (isFast) {
-            this.size = 15; // Plus petit
-            this.color = '#ff0055'; // Rouge/Rose
-            this.speed = 5 + Math.random() * 3; // Très rapide (5 à 8)
-            this.hp = 1; // Meurt en 1 coup
+            this.size = 15; 
+            this.color = '#ff0055'; 
+            this.speed = 5 + Math.random() * 3; 
+            this.hp = 1; 
         } else {
-            this.size = 25; // Taille normale
-            this.color = '#ff3333'; // Rouge standard
-            this.speed = 1.5 + Math.random() * 2; // Vitesse moyenne (1.5 à 3.5)
-            this.hp = 2; // Meurt en 2 coups
+            this.size = 25; 
+            this.color = '#ff3333'; 
+            this.speed = 1.5 + Math.random() * 2; 
+            this.hp = 2; 
         }
     }
 
     update() {
-        // Suit le joueur
         let angle = Math.atan2(player.worldY - this.worldY, player.worldX - this.worldX);
         this.worldX += Math.cos(angle) * this.speed;
         this.worldY += Math.sin(angle) * this.speed;
@@ -283,7 +265,6 @@ class StaticDebris {
     }
 }
 
-// --- INSTANCES ---
 let player;
 let projectiles = [];
 let cores = [];
@@ -291,7 +272,6 @@ let protectors = [];
 let enemies = [];
 let debris = [];
 
-// --- LOGIQUE ---
 
 function initWorld() {
     for(let i=0; i<150; i++) debris.push(new StaticDebris());
@@ -343,7 +323,6 @@ function drawRadarIndicators() {
 }
 
 function checkCollisions() {
-    // Projectiles touchant Protectors ou Ennemis
     for (let i = projectiles.length - 1; i >= 0; i--) {
         let p = projectiles[i];
         let hit = false;
@@ -373,12 +352,10 @@ function checkCollisions() {
         if (hit) projectiles.splice(i, 1);
     }
 
-    // Joueur ramasse un Core
     for (let i = cores.length - 1; i >= 0; i--) {
         let core = cores[i];
         if (Math.hypot(player.worldX - core.worldX, player.worldY - core.worldY) < core.size + player.width/2) {
             
-            // --- DÉCLENCHE L'ATTAQUE DES SATELLITES ---
             protectors.forEach(prot => {
                 if (prot.core === core) {
                     prot.isAttacking = true;
@@ -396,20 +373,18 @@ function checkCollisions() {
         }
     }
 
-    // Satellites protecteurs touchent le joueur
     for (let i = protectors.length - 1; i >= 0; i--) {
         let prot = protectors[i];
         if (Math.hypot(player.worldX - prot.worldX, player.worldY - prot.worldY) < (prot.size + player.width)/2) {
             if (prot.isAttacking) {
-                player.takeDamage(10); // S'ils attaquent, ils explosent en kamikaze
+                player.takeDamage(10); 
                 protectors.splice(i, 1);
             } else {
-                player.takeDamage(1); // S'ils orbitent, dégâts continus si on se cogne
+                player.takeDamage(1); 
             }
         }
     }
 
-    // Ennemis touchent le joueur
     for (let i = enemies.length - 1; i >= 0; i--) {
         let e = enemies[i];
         if (Math.hypot(player.worldX - e.worldX, player.worldY - e.worldY) < (e.size + player.width)/2) {
@@ -438,7 +413,6 @@ function animate() {
     cores.forEach(c => c.update());
     protectors.forEach(p => p.update());
     
-    // Fréquence d'apparition des ennemis
     if (frameCount % 90 === 0 && enemies.length < 15) {
         enemies.push(new Enemy());
     }

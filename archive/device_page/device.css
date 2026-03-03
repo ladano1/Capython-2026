@@ -1,0 +1,113 @@
+body {
+    background: black;
+    color: #00f7ff;
+    font-family: monospace;
+    padding: 80px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Subtle moving grid background */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0,247,255,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,247,255,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -2;
+    animation: gridMove 40s linear infinite;
+}
+
+/* Scanline screen overlay */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03) 0px,
+        rgba(255,255,255,0.03) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Grid animation */
+@keyframes gridMove {
+    from { transform: translate(0,0); }
+    to { transform: translate(40px,40px); }
+}
+
+
+h1 {
+    letter-spacing: 4px;
+    text-shadow: 
+        0 0 8px #00f7ff,
+        0 0 18px rgba(0,247,255,0.6),
+        0 0 35px rgba(0,247,255,0.4);
+}
+
+
+.flicker {
+    animation: flicker 1.2s infinite alternate;
+}
+
+@keyframes flicker {
+    from { 
+        opacity: 1; 
+        text-shadow: 0 0 12px #00f7ff;
+    }
+    to { 
+        opacity: 0.65; 
+        text-shadow: 0 0 25px #00f7ff;
+    }
+}
+
+
+a { 
+    color: white; 
+    text-decoration: none;
+    transition: 0.3s ease;
+    position: relative;
+}
+
+a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 1px;
+    background: #00f7ff;
+    transition: 0.3s ease;
+}
+
+a:hover { 
+    color: #00f7ff;
+    text-shadow: 0 0 10px #00f7ff;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+
+@keyframes ambientPulse {
+    0%,100% { box-shadow: 0 0 0 rgba(0,247,255,0); }
+    50% { box-shadow: 0 0 120px rgba(0,247,255,0.05); }
+}
+
+body {
+    animation: ambientPulse 6s infinite ease-in-out;
+}
+
+
+@media (max-width: 768px) {
+    body {
+        padding: 40px 20px;
+    }
+}
