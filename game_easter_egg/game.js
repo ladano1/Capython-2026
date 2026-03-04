@@ -20,7 +20,7 @@ let camera = { x: 0, y: 0 };
 let mouse = { x: 0, y: 0, isDown: false };
 const keys = { w: false, a: false, s: false, d: false };
 
-// --- GESTION DE LA TAILLE DE L'ÉCRAN ---
+
 function resizeCanvas() {
     const container = document.getElementById('game-container');
     canvas.width = container.clientWidth;
@@ -29,18 +29,17 @@ function resizeCanvas() {
     mouse.y = canvas.height / 2;
 }
 window.addEventListener('resize', resizeCanvas);
-// On attend un court instant que le CSS s'applique avant de redimensionner
+
 setTimeout(resizeCanvas, 0); 
 
-// --- GESTION TACTILE & SOURIS ---
+
 function updatePointerPos(clientX, clientY) {
-    // Le calcul permet à la souris d'être précise, que le jeu soit en 800x600 ou en plein écran mobile
     const rect = canvas.getBoundingClientRect();
     mouse.x = clientX - rect.left;
     mouse.y = clientY - rect.top;
 }
 
-// 1. Clavier & Souris (PC)
+
 window.addEventListener('keydown', (e) => {
     let key = e.key.toLowerCase();
     if (key === 'w' || key === 'arrowup') keys.w = true;
@@ -59,7 +58,7 @@ canvas.addEventListener('mousemove', (e) => updatePointerPos(e.clientX, e.client
 canvas.addEventListener('mousedown', () => mouse.isDown = true);
 canvas.addEventListener('mouseup', () => mouse.isDown = false);
 
-// 2. Boutons Mobiles (D-Pad)
+
 function bindMobileButton(btnId, keyMap) {
     const btn = document.getElementById(btnId);
     if(!btn) return;
@@ -71,7 +70,7 @@ bindMobileButton('btn-down', 's');
 bindMobileButton('btn-left', 'a');
 bindMobileButton('btn-right', 'd');
 
-// 3. Tactile sur le Canvas (Tirer)
+
 canvas.addEventListener('touchstart', (e) => {
     e.preventDefault();
     updatePointerPos(e.touches[0].clientX, e.touches[0].clientY);
@@ -88,7 +87,7 @@ canvas.addEventListener('touchend', (e) => {
     mouse.isDown = false;
 }, {passive: false});
 
-// --- CLASSES ---
+
 
 class Player {
     constructor() {
@@ -249,10 +248,10 @@ class StaticDebris {
     }
 }
 
-// --- INSTANCES ---
+
 let player; let projectiles = []; let cores = []; let protectors = []; let enemies = []; let debris = [];
 
-// --- LOGIQUE ---
+
 
 function initWorld() {
     for(let i=0; i<150; i++) debris.push(new StaticDebris());
