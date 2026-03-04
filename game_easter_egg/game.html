@@ -2,15 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sol III Intercepted - Core Retrieval</title>
-    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div id="portrait-warning">
+    <p>Please rotate your device to landscape mode to play.</p>
+    <div style="font-size: 40px; margin-top: 20px;">↻</div>
+</div>
 
 <div id="game-container">
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <canvas id="gameCanvas"></canvas>
     
     <div id="ui">
         <div>
@@ -19,7 +23,18 @@
         </div>
         <div style="text-align: right;">
             <div class="stat">ENERGY CORES: <span id="score-display">0</span> / 5</div>
-            <div class="stat" style="margin-top: 5px; font-size: 12px; color: #aaa;">WASD: Move | Mouse: Aim/Shoot</div>
+            <div class="stat" id="controls-hint" style="margin-top: 5px; font-size: 12px; color: #aaa;">WASD: Move | Mouse: Aim/Shoot</div>
+        </div>
+    </div>
+
+    <div id="mobile-controls">
+        <div id="dpad">
+            <button id="btn-up" class="ctrl-btn">▲</button>
+            <div class="dpad-row">
+                <button id="btn-left" class="ctrl-btn">◄</button>
+                <button id="btn-down" class="ctrl-btn">▼</button>
+                <button id="btn-right" class="ctrl-btn">►</button>
+            </div>
         </div>
     </div>
 
