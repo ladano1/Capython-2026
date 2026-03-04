@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     if (!prefersReducedMotion) {
-        const elements = document.querySelectorAll("h1, p");
+const elements = document.querySelectorAll("h1, p:not(:has(a))");
 
         elements.forEach(el => {
             if (el.dataset.typed === "1") return;

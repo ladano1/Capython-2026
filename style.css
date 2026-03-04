@@ -28,7 +28,6 @@ body::after {
 }
 
 
-
 #particles {
     position: fixed;
     inset: 0;
@@ -61,10 +60,11 @@ header {
     backdrop-filter: blur(6px);
 }
 
-.logo {
-    font-size: 14px;
-    letter-spacing: 4px;
-    color: #777;
+.logo img {
+    width: clamp(90px, 8vw, 140px);
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .agency-name {
@@ -315,8 +315,6 @@ footer {
     0%,100% { opacity:1; }
     50% { opacity:0.85; }
 }
-
-
 
 .glitch-burst {
     animation: glitchFlash 0.3s;

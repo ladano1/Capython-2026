@@ -1,16 +1,17 @@
 body {
     margin: 0;
-    background: #06090f;
+    background: radial-gradient(circle at center, #0b0f17 0%, #04070c 70%);
     color: #d9e1e8;
     font-family: 'Courier New', monospace;
     overflow-x: hidden;
 }
 
+
+
 body::before {
     content: "";
     position: fixed;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: repeating-linear-gradient(
         to bottom,
         rgba(0,255,255,0.03),
@@ -19,38 +20,82 @@ body::before {
         transparent 3px
     );
     pointer-events: none;
+    z-index: 1;
 }
+
+
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 40%, #000 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+
 
 .container {
     width: 85%;
     max-width: 900px;
     margin: auto;
     padding-top: 80px;
+    padding-bottom: 80px;
+
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(0,255,255,0.15);
+    box-shadow:
+        0 0 25px rgba(0,255,255,0.05),
+        inset 0 0 25px rgba(0,255,255,0.03);
+
+    padding-left: 40px;
+    padding-right: 40px;
+
+    backdrop-filter: blur(4px);
 }
 
+/* header */
+
 .header {
-    border-bottom: 1px solid rgba(0,255,255,0.2);
+    border-bottom: 1px solid rgba(0,255,255,0.25);
     padding-bottom: 20px;
     margin-bottom: 40px;
 }
+
+
 
 .header h1 {
     color: #00f7ff;
     letter-spacing: 5px;
     font-size: 26px;
+
+    text-shadow:
+        0 0 8px rgba(0,247,255,0.6),
+        0 0 18px rgba(0,247,255,0.2);
 }
+
+
 
 .classification {
     color: #ff3c3c;
     font-size: 13px;
     letter-spacing: 3px;
+
+    text-shadow: 0 0 6px rgba(255,60,60,0.5);
 }
 
+
+
 .log-text {
-    line-height: 1.8;
+    line-height: 1.9;
     font-size: 16px;
     min-height: 200px;
+
+    color: #cfd8dc;
 }
+
+
 
 .glitch {
     color: #ff3c3c;
@@ -62,15 +107,33 @@ body::before {
     to { opacity: 0.6; }
 }
 
+
+
 .hidden-word {
     color: #d9e1e8;
     text-decoration: none;
+    transition: 0.25s;
 }
 
 .hidden-word:hover {
     text-decoration: underline;
     color: #00f7ff;
+    text-shadow: 0 0 8px rgba(0,247,255,0.7);
 }
+
+
+
+a {
+    color: #ff6c2d;
+    text-decoration: underline;
+    transition: 0.25s;
+}
+
+a:hover {
+    text-shadow: 0 0 8px #ff0000;
+}
+
+
 
 .return {
     margin-top: 60px;
@@ -78,4 +141,30 @@ body::before {
     color: #00f7ff;
     text-decoration: none;
     font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.return:hover {
+    text-shadow: 0 0 8px rgba(0,247,255,0.8);
+}
+
+
+
+@media (max-width: 700px) {
+
+    .container {
+        width: 92%;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 60px;
+    }
+
+    .header h1 {
+        font-size: 22px;
+        letter-spacing: 3px;
+    }
+
+    .log-text {
+        font-size: 15px;
+    }
 }

@@ -34,15 +34,19 @@ Signal origin currently unknown.
 
 let i = 0;
 const speed = 35;
-const target = document.getElementById("typewriter");
 
-function typeWriter() {
-    if (i < text.length) {
-        target.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, speed);
+document.addEventListener("DOMContentLoaded", () => {
+
+    const target = document.getElementById("typewriter");
+
+    function typeWriter() {
+        if (i < text.length) {
+            target.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
     }
-}
 
-typeWriter();
+    typeWriter();
 
+});

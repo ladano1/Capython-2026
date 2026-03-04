@@ -7,7 +7,6 @@ body {
     position: relative;
 }
 
-/* Subtle moving grid background */
 body::before {
     content: "";
     position: fixed;
@@ -20,7 +19,6 @@ body::before {
     animation: gridMove 40s linear infinite;
 }
 
-/* Scanline screen overlay */
 body::after {
     content: "";
     position: fixed;
@@ -36,7 +34,6 @@ body::after {
     z-index: 10;
 }
 
-/* Grid animation */
 @keyframes gridMove {
     from { transform: translate(0,0); }
     to { transform: translate(40px,40px); }
