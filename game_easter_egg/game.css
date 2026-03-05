@@ -2,9 +2,9 @@ body {
     margin: 0;
     padding: 0;
     background-color: #0d0d0d;
-    color: #fffF;
+    color: #fff;
     font-family: 'Courier New', Courier, monospace;
-    display: flex; 
+    display: flex; /* Centre le jeu sur PC */
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -12,7 +12,7 @@ body {
     touch-action: none; 
 }
 
-
+/* Écran qui force le mode paysage sur mobile */
 #portrait-warning {
     display: none;
     position: fixed;
@@ -28,6 +28,7 @@ body {
     box-sizing: border-box;
 }
 
+/* Taille fixe pour PC (800x600) avec une bordure */
 #game-container {
     position: relative;
     width: 800px;
@@ -79,7 +80,7 @@ canvas {
     position: absolute;
     bottom: 30px;
     left: 30px;
-    display: none; 
+    display: none; /* Toujours caché sur PC */
     z-index: 10;
 }
 
@@ -131,9 +132,9 @@ h1, p { text-align: center; }
 h1 { color: #ff3333; letter-spacing: 5px; margin-bottom: 10px; }
 button#restart-btn { margin-top: 20px; padding: 10px 20px; background: transparent; color: #fff; border: 2px solid #fff; cursor: pointer; text-transform: uppercase; }
 
-
+/* --- RESPONSIVE & MOBILE --- */
 @media (max-width: 1200px), (pointer: coarse) {
-
+    /* Sur mobile, on enlève les bordures et on passe en vrai plein écran */
     #game-container { 
         width: 100vw; 
         height: 100vh; 

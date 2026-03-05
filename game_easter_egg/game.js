@@ -20,7 +20,32 @@ let camera = { x: 0, y: 0 };
 let mouse = { x: 0, y: 0, isDown: false };
 const keys = { w: false, a: false, s: false, d: false };
 
+// --- CHARGEMENT DES SPRITES ---
+const imgPlayerDown = new Image();
+imgPlayerDown.src = 'player_forward.png'; 
 
+const imgPlayerUp = new Image();
+imgPlayerUp.src = 'player_back.png';      
+
+const imgPlayerLeft = new Image();
+imgPlayerLeft.src = 'player_left.png';       
+
+const imgPlayerRight = new Image();
+imgPlayerRight.src = 'player_right.png';     
+
+const imgProjectile = new Image();
+imgProjectile.src = 'projectile.png';     
+
+const imgEnemySlow = new Image();
+imgEnemySlow.src = 'enemy_slow.png';      
+
+const imgSatellite = new Image();
+imgSatellite.src = 'satellite.png';       
+
+const imgEnemyFast = new Image();
+imgEnemyFast.src = 'small.gif'; 
+
+// --- GESTION DE LA TAILLE DE L'ÉCRAN ---
 function resizeCanvas() {
     const container = document.getElementById('game-container');
     canvas.width = container.clientWidth;
@@ -29,16 +54,14 @@ function resizeCanvas() {
     mouse.y = canvas.height / 2;
 }
 window.addEventListener('resize', resizeCanvas);
-
 setTimeout(resizeCanvas, 0); 
 
-
+// --- GESTION TACTILE & SOURIS ---
 function updatePointerPos(clientX, clientY) {
     const rect = canvas.getBoundingClientRect();
     mouse.x = clientX - rect.left;
     mouse.y = clientY - rect.top;
 }
-
 
 window.addEventListener('keydown', (e) => {
     let key = e.key.toLowerCase();
@@ -58,7 +81,6 @@ canvas.addEventListener('mousemove', (e) => updatePointerPos(e.clientX, e.client
 canvas.addEventListener('mousedown', () => mouse.isDown = true);
 canvas.addEventListener('mouseup', () => mouse.isDown = false);
 
-
 function bindMobileButton(btnId, keyMap) {
     const btn = document.getElementById(btnId);
     if(!btn) return;
@@ -70,34 +92,45 @@ bindMobileButton('btn-down', 's');
 bindMobileButton('btn-left', 'a');
 bindMobileButton('btn-right', 'd');
 
-
 canvas.addEventListener('touchstart', (e) => {
     e.preventDefault();
     updatePointerPos(e.touches[0].clientX, e.touches[0].clientY);
     mouse.isDown = true;
 }, {passive: false});
-
 canvas.addEventListener('touchmove', (e) => {
     e.preventDefault();
     updatePointerPos(e.touches[0].clientX, e.touches[0].clientY);
 }, {passive: false});
-
 canvas.addEventListener('touchend', (e) => {
     e.preventDefault();
     mouse.isDown = false;
 }, {passive: false});
 
 
+// --- CLASSES ---
 
 class Player {
     constructor() {
-        this.width = 30; this.height = 30;
-        this.worldX = WORLD_SIZE / 2; this.worldY = WORLD_SIZE / 2;
-        this.vx = 0; this.vy = 0;
-        this.friction = 0.94; // Glissade dans l'espace
-        this.color = '#00aaff';
+        this.width = 100;  
+        this.height = 100; 
+        this.pickupRadius = 60;
+        this.hitboxRadius = 20;
+        this.worldX = WORLD_SIZE / 2; 
+        this.worldY = WORLD_SIZE / 2;
+        this.vx = 0; 
+        this.vy = 0;
+        this.friction = 0.94; 
         this.maxHealth = 100; this.health = this.maxHealth;
         this.cooldown = 0; this.angle = 0;
+        
+        this.currentSprite = imgPlayerDown; 
+
+        this.frameIndex = 0;       
+        this.tickCount = 0;        
+        this.ticksPerFrame = 10;   
+        this.numberOfFrames = 3;   
+
+        this.hitTimer = 0; 
     }
 
     update() {
@@ -108,6 +141,34 @@ class Player {
         if (keys.a) dirX -= 1;
         if (keys.d) dirX += 1;
 
+        if (dirX < 0) {
+            this.currentSprite = imgPlayerLeft;     
+        } else if (dirX > 0) {
+            this.currentSprite = imgPlayerRight;    
+        } else if (dirY < 0) {
+            this.currentSprite = imgPlayerUp;       
+        } else if (dirY > 0) {
+            this.currentSprite = imgPlayerDown;     
+        }
+
+        if (this.hitTimer > 0) {
+            this.frameIndex = 2; 
+            this.hitTimer--;
+            this.tickCount = 0; 
+        } else {
+            let isMoving = (dirX !== 0 || dirY !== 0);
+            if (isMoving) {
+                this.tickCount++;
+                if (this.tickCount > this.ticksPerFrame) {
+                    this.tickCount = 0;
+                    this.frameIndex = (this.frameIndex + 1) % 2; 
+                }
+            } else {
+                this.frameIndex = 0; 
+                this.tickCount = 0;
+            }
+        }
+
         if (dirX !== 0 || dirY !== 0) {
             let length = Math.hypot(dirX, dirY);
             dirX /= length; 
@@ -117,7 +178,6 @@ class Player {
         let acceleration = 0.6; 
         this.vx += dirX * acceleration;
         this.vy += dirY * acceleration;
-
         this.vx *= this.friction;
         this.vy *= this.friction;
 
@@ -139,21 +199,32 @@ class Player {
         let screenX = this.worldX - camera.x;
         let screenY = this.worldY - camera.y;
 
+        if (this.currentSprite.complete && this.currentSprite.naturalWidth !== 0) {
+            let frameWidth = this.currentSprite.naturalWidth / this.numberOfFrames; 
+            let frameHeight = this.currentSprite.naturalHeight;
+            let sourceX = this.frameIndex * frameWidth;
+
+            ctx.drawImage(
+                this.currentSprite, 
+                sourceX, 0, frameWidth, frameHeight, 
+                screenX - this.width / 2, screenY - this.height / 2, this.width, this.height 
+            );
+        } else {
+            ctx.fillStyle = '#00aaff';
+            ctx.fillRect(screenX - this.width/2, screenY - this.height/2, this.width, this.height);
+        }
+
         ctx.save();
         ctx.translate(screenX, screenY);
         ctx.rotate(this.angle);
-        
-        ctx.fillStyle = this.color;
-        ctx.fillRect(-this.width/2, -this.height/2, this.width, this.height);
-        
         ctx.fillStyle = '#fff';
-        ctx.fillRect(this.width/2, -4, 15, 8);
-        
+        ctx.fillRect(this.width / 2, -4, 25, 8); 
         ctx.restore();
     }
 
     takeDamage(amount) {
         this.health -= amount;
+        this.hitTimer = 10; 
         healthBar.style.width = Math.max(0, (this.health / this.maxHealth) * 100) + '%';
         if (this.health <= 0) endGame(false);
     }
@@ -163,12 +234,22 @@ class Projectile {
     constructor(x, y, angle) {
         this.worldX = x; this.worldY = y;
         this.vx = Math.cos(angle) * 12; this.vy = Math.sin(angle) * 12;
-        this.radius = 4; this.color = '#ffff00'; this.life = 100;
+        this.radius = 4; 
+        this.size = 20; 
+        this.color = '#ffff00'; 
+        this.life = 100;
     }
     update() { this.worldX += this.vx; this.worldY += this.vy; this.life--; this.draw(); }
     draw() {
-        ctx.beginPath(); ctx.arc(this.worldX - camera.x, this.worldY - camera.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color; ctx.fill();
+        let screenX = this.worldX - camera.x;
+        let screenY = this.worldY - camera.y;
+
+        if (imgProjectile.complete && imgProjectile.naturalWidth !== 0) {
+            ctx.drawImage(imgProjectile, screenX - this.size/2, screenY - this.size/2, this.size, this.size);
+        } else {
+            ctx.beginPath(); ctx.arc(screenX, screenY, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color; ctx.fill();
+        }
     }
 }
 
@@ -191,7 +272,10 @@ class SatelliteProtector {
     constructor(core) {
         this.core = core; this.angle = Math.random() * Math.PI * 2;
         this.orbitRadius = 80 + Math.random() * 40; this.orbitSpeed = 0.02 + Math.random() * 0.03;
-        this.attackSpeed = 4 + Math.random() * 1.5; this.size = 20; this.hp = 3; this.isAttacking = false;
+        this.attackSpeed = 4 + Math.random() * 1.5; 
+        this.size = 60; 
+        this.hitboxRadius = 20;
+        this.hp = 3; this.isAttacking = false;
     }
     update() {
         if (!this.isAttacking) {
@@ -206,8 +290,21 @@ class SatelliteProtector {
     }
     draw() {
         let screenX = this.worldX - camera.x; let screenY = this.worldY - camera.y;
-        ctx.fillStyle = this.isAttacking ? '#ff0000' : '#ff6600'; 
-        ctx.fillRect(screenX - this.size/2, screenY - this.size/2, this.size, this.size);
+
+        if (imgSatellite.complete && imgSatellite.naturalWidth !== 0) {
+            let frameWidth = imgSatellite.naturalWidth / 2; 
+            let frameHeight = imgSatellite.naturalHeight;
+            let sourceX = this.isAttacking ? frameWidth : 0;
+
+            ctx.drawImage(
+                imgSatellite,
+                sourceX, 0, frameWidth, frameHeight,
+                screenX - this.size/2, screenY - this.size/2, this.size, this.size
+            );
+        } else {
+            ctx.fillStyle = this.isAttacking ? '#ff0000' : '#ff6600'; 
+            ctx.fillRect(screenX - this.size/2, screenY - this.size/2, this.size, this.size);
+        }
     }
 }
 
@@ -218,22 +315,63 @@ class Enemy {
         this.worldX = player.worldX + Math.cos(angle) * dist;
         this.worldY = player.worldY + Math.sin(angle) * dist;
         
-        let isFast = Math.random() < 0.3; 
+        this.isFast = Math.random() < 0.3; 
 
-        if (isFast) {
-            this.size = 15; this.color = '#ff0055'; this.speed = 5 + Math.random() * 3; this.hp = 1; 
+        if (this.isFast) {
+            this.size = 40; 
+            this.hitboxRadius = 20; 
+            this.color = '#ff0055'; 
+            this.speed = 5 + Math.random() * 3; 
+            this.hp = 1; 
         } else {
-            this.size = 25; this.color = '#ff3333'; this.speed = 1.5 + Math.random() * 2; this.hp = 2; 
+            this.size = 80; 
+            this.hitboxRadius = 20; 
+            this.color = '#ff3333'; 
+            this.speed = 1.5 + Math.random() * 2; 
+            this.hp = 2; 
         }
     }
+    
     update() {
         let angle = Math.atan2(player.worldY - this.worldY, player.worldX - this.worldX);
-        this.worldX += Math.cos(angle) * this.speed; this.worldY += Math.sin(angle) * this.speed;
+        this.worldX += Math.cos(angle) * this.speed; 
+        this.worldY += Math.sin(angle) * this.speed;
         this.draw();
     }
+    
     draw() {
-        let screenX = this.worldX - camera.x; let screenY = this.worldY - camera.y;
-        ctx.fillStyle = this.color; ctx.fillRect(screenX - this.size/2, screenY - this.size/2, this.size, this.size);
+        let screenX = this.worldX - camera.x; 
+        let screenY = this.worldY - camera.y;
+
+        if (this.isFast) {
+            // --- CORRECTION : Le code pour dessiner est bien dans la fonction draw() maintenant ! ---
+            if (imgEnemyFast.complete && imgEnemyFast.naturalWidth !== 0) {
+                ctx.drawImage(
+                    imgEnemyFast,
+                    screenX - this.size / 2, 
+                    screenY - this.size / 2, 
+                    this.size, 
+                    this.size
+                );  
+            } else {
+                ctx.fillStyle = this.color; 
+                ctx.fillRect(screenX - this.size/2, screenY - this.size/2, this.size, this.size);
+            }
+        } else {
+            if (!this.isFast && imgEnemySlow.complete && imgEnemySlow.naturalWidth !== 0) {
+                let frameWidth = imgEnemySlow.naturalWidth / 2;
+                let frameHeight = imgEnemySlow.naturalHeight;
+                
+                ctx.drawImage(
+                    imgEnemySlow,
+                    0, 0, frameWidth, frameHeight,
+                    screenX - this.size/2, screenY - this.size/2, this.size, this.size
+                );
+            } else {
+                ctx.fillStyle = this.color; 
+                ctx.fillRect(screenX - this.size/2, screenY - this.size/2, this.size, this.size);
+            }
+        }
     }
 }
 
@@ -248,10 +386,10 @@ class StaticDebris {
     }
 }
 
-
+// --- INSTANCES ---
 let player; let projectiles = []; let cores = []; let protectors = []; let enemies = []; let debris = [];
 
-
+// --- LOGIQUE ---
 
 function initWorld() {
     for(let i=0; i<150; i++) debris.push(new StaticDebris());
@@ -301,7 +439,7 @@ function checkCollisions() {
 
         for (let j = protectors.length - 1; j >= 0; j--) {
             let prot = protectors[j];
-            if (Math.hypot(p.worldX - prot.worldX, p.worldY - prot.worldY) < prot.size) {
+            if (Math.hypot(p.worldX - prot.worldX, p.worldY - prot.worldY) < prot.hitboxRadius) {
                 prot.hp--; hit = true;
                 if (prot.hp <= 0) protectors.splice(j, 1);
                 break;
@@ -311,7 +449,7 @@ function checkCollisions() {
         if (!hit) {
             for (let j = enemies.length - 1; j >= 0; j--) {
                 let e = enemies[j];
-                if (Math.hypot(p.worldX - e.worldX, p.worldY - e.worldY) < e.size) {
+                if (Math.hypot(p.worldX - e.worldX, p.worldY - e.worldY) < e.hitboxRadius) {
                     e.hp--; hit = true;
                     if (e.hp <= 0) enemies.splice(j, 1);
                     break;
@@ -324,7 +462,7 @@ function checkCollisions() {
 
     for (let i = cores.length - 1; i >= 0; i--) {
         let core = cores[i];
-        if (Math.hypot(player.worldX - core.worldX, player.worldY - core.worldY) < core.size + player.width/2) {
+        if (Math.hypot(player.worldX - core.worldX, player.worldY - core.worldY) < (core.size / 2) + player.pickupRadius) {
             
             protectors.forEach(prot => {
                 if (prot.core === core) prot.isAttacking = true;
@@ -340,7 +478,7 @@ function checkCollisions() {
 
     for (let i = protectors.length - 1; i >= 0; i--) {
         let prot = protectors[i];
-        if (Math.hypot(player.worldX - prot.worldX, player.worldY - prot.worldY) < (prot.size + player.width)/2) {
+        if (Math.hypot(player.worldX - prot.worldX, player.worldY - prot.worldY) < prot.hitboxRadius + player.hitboxRadius) {
             if (prot.isAttacking) {
                 player.takeDamage(10); protectors.splice(i, 1);
             } else {
@@ -351,7 +489,7 @@ function checkCollisions() {
 
     for (let i = enemies.length - 1; i >= 0; i--) {
         let e = enemies[i];
-        if (Math.hypot(player.worldX - e.worldX, player.worldY - e.worldY) < (e.size + player.width)/2) {
+        if (Math.hypot(player.worldX - e.worldX, player.worldY - e.worldY) < e.hitboxRadius + player.hitboxRadius) {
             player.takeDamage(15); enemies.splice(i, 1); 
         }
     }
@@ -405,6 +543,19 @@ function startGame() {
     initWorld();
     cancelAnimationFrame(animationId);
     animate();
+}
+
+function endGame(victory) {
+    gameOverScreen.style.display = 'flex';
+    if (victory) {
+        endTitle.style.color = '#00ff88';
+        endTitle.innerText = "CORES SECURED";
+        endMessage.innerText = "Hope is not dead. Kahz found what he was looking for.";
+    } else {
+        endTitle.style.color = '#ff3333';
+        endTitle.innerText = "CRITICAL FAILURE";
+        endMessage.innerText = "\"We estimate the global population at a mere 8,000. And now, one less.\"";
+    }
 }
 
 startGame();
